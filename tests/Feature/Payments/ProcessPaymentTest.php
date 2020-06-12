@@ -24,9 +24,12 @@ class ProcessPaymentTest extends TestCase
         ]);
 
         $testable = Livewire::test(ProcessPayment::class, ['payment' => $payment])
-            ->set('billingToken', 'TEST_TOKEN_1234')
+            ->set('billingToken', $billingGateway->generateValidPaymentToken())
             ->call('process');
 
         $this->assertEquals(PaymentStatus::PAID, $payment->fresh()->status);
+        $this->assertEquals(1200, $billingGateway->getTotalChargesAmount());
+        $this->assertEquals(1, $billingGateway->charges()->count());
+        $this->assertEquals($billingGateway->lastCharge()->id, $payment->billing_charge_id);
     }
 }
