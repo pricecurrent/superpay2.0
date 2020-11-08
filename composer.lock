@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0da088f896409cd882580f1e11ae8f8a",
+    "content-hash": "b19ae6ae5ded6d48e437cd04c471ee02",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1200,16 +1200,16 @@
         },
         {
             "name": "livewire/livewire",
-            "version": "v1.2.0",
+            "version": "v1.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/livewire/livewire.git",
-                "reference": "874ba1b8d6b12efa472147697942fe2f78a5d371"
+                "reference": "b1673ff9fc78a3296ca4a3b0d1ca26da0a5cdf82"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/livewire/livewire/zipball/874ba1b8d6b12efa472147697942fe2f78a5d371",
-                "reference": "874ba1b8d6b12efa472147697942fe2f78a5d371",
+                "url": "https://api.github.com/repos/livewire/livewire/zipball/b1673ff9fc78a3296ca4a3b0d1ca26da0a5cdf82",
+                "reference": "b1673ff9fc78a3296ca4a3b0d1ca26da0a5cdf82",
                 "shasum": ""
             },
             "require": {
@@ -1253,7 +1253,13 @@
                 }
             ],
             "description": "A front-end framework for Laravel.",
-            "time": "2020-06-08T15:12:38+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/calebporzio",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-09-17T04:38:16+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -4271,6 +4277,7 @@
                 "faker",
                 "fixtures"
             ],
+            "abandoned": true,
             "time": "2019-12-12T13:22:17+00:00"
         },
         {
@@ -5070,6 +5077,7 @@
             "keywords": [
                 "tokenizer"
             ],
+            "abandoned": true,
             "time": "2019-09-17T06:23:10+00:00"
         },
         {
@@ -5936,5 +5944,6 @@
     "platform": {
         "php": "^7.2.5"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "1.1.0"
 }

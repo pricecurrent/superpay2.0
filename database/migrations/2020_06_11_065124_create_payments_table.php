@@ -17,6 +17,7 @@ class CreatePaymentsTable extends Migration
             $table->id();
             $table->string('status');
             $table->integer('amount');
+            $table->string('billing_charge_id')->nullable();
             $table->timestamps();
         });
     }

@@ -2,9 +2,11 @@
 
 namespace App\Http\Livewire\Payments;
 
-use App\Payments\Payment;
-use App\Payments\PaymentStatus;
 use Livewire\Component;
+use App\Payments\Payment;
+use App\Billing\BillingGateway;
+use App\Payments\PaymentStatus;
+use Illuminate\Contracts\Auth\Guard;
 
 class ProcessPayment extends Component
 {
@@ -16,11 +18,13 @@ class ProcessPayment extends Component
         $this->payment = $payment;
     }
 
-    public function process()
+    public function process(BillingGateway $billingGateway)
     {
-        $this->provder->charge($this->billingToken); ///
+        $charge = $billingGateway->charge($this->payment->amount, $this->billingToken);
+
         $this->payment->update([
             'status' => PaymentStatus::PAID,
+            'billing_charge_id' => $charge->getBillingId()
         ]);
     }
 
