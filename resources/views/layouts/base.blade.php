@@ -19,6 +19,7 @@
 
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <script src="https://js.stripe.com/v3/"></script>
     </head>
 
     <body class="text-gray-900 antialiased">

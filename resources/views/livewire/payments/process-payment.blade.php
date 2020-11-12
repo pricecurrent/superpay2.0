@@ -24,24 +24,20 @@
             <span class="font-medium">Payment details</span>
         </div>
 
-        <form class="mt-6">
+        <form
+            x-data="{stripe: null, elements: null, card: null}"
+            x-init="
+                stripe = Stripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
+                elements = stripe.elements();
+                card = elements.create('card');
+                card.mount($refs.cardElement);
+            "
+            class="mt-6"
+        >
             <div>
                 <label class="font-medium text-sm">Card Details</label>
-                <div class="mt-2 py-2 px-4 flex border border-gray-300 rounded-xl">
-                    <div class="relative w-7/12 border-r-2 border-gray-300">
-                        <div class="absolute bottom-0 inline-flex items-center top-0">
-                            <svg class="w-4 h-4 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
-                            </svg>
-                        </div>
-                        <input class="pl-6 w-full text-sm text-gray-500 tracking-wide focus:outline-none" placeholder="4242424242424242">
-                    </div>
-                    <div class="px-6 w-3/12 border-r-2 border-gray-300">
-                        <input class="w-full text-sm text-gray-500 tracking-wide focus:outline-none" placeholder="11/22">
-                    </div>
-                    <div class="pl-6 w-2/12">
-                        <input class="w-full text-sm text-gray-500 tracking-wide focus:outline-none" placeholder="012">
-                    </div>
+                <div class="mt-2 border py-2 px-4 border-gray-300 rounded-xl">
+                    <div wire:ignore x-ref="cardElement"></div>
                 </div>
             </div>
 
@@ -57,7 +53,13 @@
             </div>
 
             <div class="mt-8 text-right">
-                <button class="px-10 py-2 rounded-lg bg-gradient-to-r from-blue-700 to-blue-400">
+                <button x-on:click.prevent="
+                        stripe.createToken(card).then(response => {
+                            @this.set('billingToken', response.token.id);
+                            @this.call('process');
+                        })
+                    "
+                    class="px-10 py-2 rounded-lg bg-gradient-to-r from-blue-700 to-blue-400">
                     <span class="text-white text-sm tracking-wide font-medium">Pay ${{ $payment->amount }}</span>
                 </button>
             </div>

@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Billing\BillingGateway;
+use App\Billing\FakeBillingGateway;
 use App\Billing\StripeBillingGateway;
 use Illuminate\Support\ServiceProvider;
 
@@ -16,7 +17,8 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton(BillingGateway::class, function () {
-            return new StripeBillingGateway();
+            return new FakeBillingGateway();
+            // return new StripeBillingGateway();
         });
     }
 
